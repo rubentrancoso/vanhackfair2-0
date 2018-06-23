@@ -36,37 +36,6 @@ public class SrvProduct implements ISrvProduct {
 		return message;
 	}
 	
-//	@Override
-//	public Object register(User user) {
-//		if(
-//			user == null ||
-//			user.getEmail() == null ||
-//			user.getEmail().isEmpty() ||
-//			user.getPassword() == null ||
-//			user.getPassword().isEmpty()
-//		) 
-//		{
-//			return new Message(Message.INVALID_USERNAME_PASSWORD);
-//		}
-//		
-//		String newToken = Jwts.builder().setSubject(user.getEmail())
-//				.setExpiration(new Date(System.currentTimeMillis() + jwtConfig.getExpirationTime()))
-//				.signWith(SignatureAlgorithm.HS512, jwtConfig.getSecret()).compact();
-//		
-//		User newUser = new User(user.getName(), user.getEmail(), user.getPassword());
-//		newUser.setPhones(user.getPhones());
-//		newUser.setPassword(passwordEncoder.encode(user.getPassword()));
-//		newUser.setToken(passwordEncoder.encode(newToken));
-//		Object message = registerTransaction(newUser);
-//		if(message instanceof User) {
-//			// return the unencrypted token only once
-//			((User)message).setToken(newToken);
-//			// do not return the encrypted password
-//			((User)message).setPassword(null);
-//		}
-//		return message;
-//	}
-//	
 	@Transactional
 	private Object addTransaction(Product product) {
 		Object result;
@@ -78,17 +47,11 @@ public class SrvProduct implements ISrvProduct {
 		}
 		return result;
 	}
-//
-//	@Override
-//	public Object profile(String uuid) {
-//		logger.info("requesting profile...");
-//		return userRepository.findById(uuid);
-//	}
 
 	@Override
 	public Object list() {
 		logger.info("listing product...");
-		return productRepository.findAll();
+		return productRepository.findAllByOrderByIdDesc();
 	}
 
 }

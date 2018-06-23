@@ -1,5 +1,7 @@
 package com.company.challenge.repositories;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -14,4 +16,7 @@ public interface ProductRepository extends PagingAndSortingRepository<Product, S
 	public User findById(int id);
 	@Transactional
 	public User findByName(String name); 
+	
+	public List<Product> findAllByOrderByIdDesc();
+	
 }
