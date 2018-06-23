@@ -1,7 +1,4 @@
 # Challenge
-this is the response for this [challenge](https://github.com/concretesolutions/desafio-java)
-
-there's also a new version that I wrote in node js [here](https://github.com/rubentrancoso/challenge-node) with some simplifications.
 
 In the root folder there's some helper scripts. 
 
@@ -19,31 +16,27 @@ The names are self-explanatory:
 
 The application will run on `port 8080` by default but you can change whatever parameter you like on `application.yml`
 
-Also in the root folder was left 3 exports from POSTMAN that were used to test the application.
+Also in the root folder was left 1 exports from POSTMAN that were used to test the application.
 
-    challenge-cloud.postman_environment.json
-    challenge-local.postman_environment.json
-    challenge.postman_collection.json
+    VanHack Fair 2.0.postman_collection.json
   
 There's also unit tests and integration tests in the package itself.
 
-The app is running on two addresses:
-
-    https://concrete.doteva.com/hello
-    http://mail.doteva.org:8081/hello
 
 The urls follows the specification:
 
     POST - /register
     POST - /login
     GET  - /profile/{uuid}
-
+    GET  - /products/
+    POST - /products/add
+    
 ## Curl samples
 ### Register
 #### request
 ```
 curl --request POST \
-  --url https://concrete.doteva.com/register \
+  --url http://remote.server/register \
   --header 'content-type: application/json' \
   --data '{
     "name": "John Doe",
@@ -79,7 +72,7 @@ curl --request POST \
 #### request
 ```
 curl --request POST \
-  --url https://concrete.doteva.com/login \
+  --url http://remote.server/login \
   --header 'content-type: application/json' \
   --data '{
     "username": "johndoe@email.com",
@@ -108,7 +101,7 @@ curl --request POST \
 #### request
 ```
 curl -X GET \
-  https://concrete.doteva.com/profile/3c5b1cd17bcc41c5ab2081880fd931cc \
+  http://remote.server/profile/3c5b1cd17bcc41c5ab2081880fd931cc \
   -H 'authorization: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb2huZG9lQGVtYWlsLmNvbSIsImV4cCI6MTUxMTI5NzA3M30.7Lu1spSpVCpmwoEbCMJiwPliGCD6nRg8m1Se9M6R136jZHYswI_ALn9X-2u3QCd03DtJKWTRXmyBAo3qCwtmOQ' \
   -H 'cache-control: no-cache'
 ```
@@ -128,6 +121,43 @@ curl -X GET \
   ],
   "last_login": "Tue 2017-11-21 20:14:33.603+0000"
 }
+```
+### Add product
+#### request
+```
+curl --request POST \
+  --url http://remote.server/products/add \
+  --header 'content-type: application/json' \
+  --data '{
+    "name": "lightsaber"
+}'
+```
+#### response
+```
+{
+    "id": 1,
+    "name": "lightsaber"
+}
+```
+### List products
+#### request
+```
+curl --request GET \
+  --url http://remote.server/products/ \
+  -H 'Cache-Control: no-cache'
+```
+#### response
+```
+[
+    {
+        "id": 1,
+        "name": "lightsaber"
+    },
+    {
+        "id": 2,
+        "name": "stormtrooper"
+    }
+]
 ```
 ### Development Notes
 #### JVM starting to slow
