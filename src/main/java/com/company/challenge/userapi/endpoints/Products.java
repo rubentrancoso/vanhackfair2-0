@@ -25,6 +25,11 @@ public class Products {
 	@Autowired
 	ISrvProduct productService;
 
+	@RequestMapping(value = "/add", method = RequestMethod.OPTIONS)
+    public ResponseEntity<Object> handle() {
+        return new ResponseEntity<Object>(HttpStatus.OK);
+    }	
+	
 	@RequestMapping(path = "/add", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody Object add(@RequestBody Product product) {
 		HttpStatus responseCode = HttpStatus.OK;
