@@ -28,6 +28,12 @@ security:
       method: 'GET'
       url: '/info'
     -
+      method: 'GET'
+      url: '/products/'
+    -
+      method: 'OPTIONS'
+      url: '/products/add'
+    -
       method: 'POST'
       url: '/products/add'
     -
