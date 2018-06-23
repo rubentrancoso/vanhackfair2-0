@@ -48,12 +48,12 @@ dependencies {
 docker {
 	baseImage = 'develar/java:latest'
 	maintainer = 'Ruben Trancoso <rubentrancoso@gmail.com>'
-	registry = 'registry.doteva.com'
+	registry = '837321916725.dkr.ecr.us-west-2.amazonaws.com'
 }
 
 task buildDocker(type: Docker) {
   push = project.hasProperty('push')
-  tag = 'registry.doteva.com/concrete/challenge'
+  tag = '837321916725.dkr.ecr.us-west-2.amazonaws.com/peoplewish-api:latest'
   addFile {
     from jar
     rename {'app.jar'}
